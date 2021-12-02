@@ -1,16 +1,19 @@
 var express = require('express');
 var router = express.Router();
 
-const cd = require('../companydata/lib/DataLayer');
 const bl = require('../BusinessLayer/departmentVal.js');
+var DataLayer = require("../companydata/index.js");
+var dl = new DataLayer("ahl4753");
+
+module.exports = require('../companydata/lib/DataLayer');
 
 /* GET departments */
-router.get('/departments/:company', function(req, res, next) {
-    let dept = bl.checkDepartmentsGet(req.params.company);
-console.log(req.params.company);
+router.get('/departments', function(req, res, next) {
+    let dept = bl.checkDepartmentsGet(req.query.company);
+    console.log(req.query.company);
     if (dept) {
 
-        dept = cd.getAllDepartment(req.params.company);
+        dept = dl.getAllDepartment(req.query.company);
         
         var response;
 

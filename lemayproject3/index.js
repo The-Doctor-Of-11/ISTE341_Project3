@@ -4,15 +4,23 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const { application } = require('express');
+var router = express.Router();
 
 var session = require('express-session');
 
 var FileStore = require('session-file-store')(session);
 
+var DataLayer = require("./companydata/index.js");
+var dl = new DataLayer("ahl4753");
+
 var useDomainForCookies = process.env.DOMAIN || false;
 var host = process.env.HOST || 'localhost';
 
-// var indexRouter = require('index.js');
+// Windows: set DEBUG=lemayproject2:* & npm start
+// PowerShell: $env:DEBUG='lemayproject2:*'; npm start
+// Unix: DEBUG=lemayproject2:* npm start
+
+var companyRouter = require('./routes/company');
 
 var departmentsRouter = require('./routes/departments');
 var departmentRouter = require('./routes/department');
@@ -64,6 +72,17 @@ app.use(session({
 }));
 
 // app.use('/', indexRouter);
+
+app.use('/', router);
+
+app.get('/', function initViewsCount(req, res, next){
+  res.json({
+    message: "Hello INDEX"
+  });
+  return next();
+});
+
+app.use('/company', companyRouter);
 
 app.use('/departments', departmentsRouter);
 app.use('/department', departmentRouter);

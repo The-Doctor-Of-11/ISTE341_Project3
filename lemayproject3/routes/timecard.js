@@ -1,8 +1,11 @@
 var express = require('express');
 var router = express.Router();
 
-const cd = require('../companydata/lib/DataLayer');
 const bl = require('../BusinessLayer/departmentVal.js');
+var DataLayer = require("../companydata/index.js");
+var dl = new DataLayer("ahl4753");
+
+module.exports = require('../companydata/lib/DataLayer');
 
 /* GET department */
 router.get('/timecard', function(req, res, next) {

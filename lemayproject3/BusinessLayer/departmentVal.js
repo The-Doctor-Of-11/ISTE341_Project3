@@ -26,3 +26,11 @@ module.exports = function checkDepartmentGet(company, dept_id) {
         return true;
     }
 }
+
+module.exports = function checkDepartmentPut(company, dept_id, dept_name, dept_no, location) {
+
+}
+
+module.exports = function checkDepartmentPost(company, dept_id, dept_name, dept_no, location) {
+
+}
