@@ -1,32 +1,27 @@
 var express = require('express');
 var router = express.Router();
 
-const bl = require('../BusinessLayer/departmentVal.js');
+const bl = require('../BusinessLayer/employeeVal');
 var DataLayer = require("../companydata/index.js");
 var dl = new DataLayer("ahl4753");
 
 module.exports = require('../companydata/lib/DataLayer');
 
-/* GET employee */
+// GET EMPLOYEES | DONE, Fix Error Handling
 router.get('/employee', function(req, res, next) {
-    let empl = bl.checkEmployeeGet(req.body.company, req.body.empl_id);
+    let empl = bl.checkEmployeeGet(req.query.company, req.query.empl_id);
     var response;
     
     if (empl) {
-        empl = cd.getEmployee(req.body.company, req.body.empl_id);
+        empl = dl.getEmployee(req.query.empl_id);
+
         if (empl == null) {
             response = {
                 error: "Employee Not Found"
             }
         }
         else {
-            response += {
-                empl_id: empl.empl_id,
-                company: empl.company,
-                empl_name: empl.empl_name,
-                empl_no: empl.empl_no,
-                location: empl.location
-            };
+            response = empl;
         }
     }
     else {
@@ -36,6 +31,11 @@ router.get('/employee', function(req, res, next) {
     }
 
     res.send(response);
+});
+
+// NEW EMPLOYEE | 
+router.post('/employee', function(req, res, next) {
+
 });
 
 module.exports = router;

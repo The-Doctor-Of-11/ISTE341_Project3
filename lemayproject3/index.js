@@ -71,9 +71,7 @@ app.use(session({
 
 }));
 
-// app.use('/', indexRouter);
-
-app.use('/', router);
+app.use(router);
 
 app.get('/', function initViewsCount(req, res, next){
   res.json({
@@ -84,14 +82,23 @@ app.get('/', function initViewsCount(req, res, next){
 
 app.use('/company', companyRouter);
 
-app.use('/departments', departmentsRouter);
-app.use('/department', departmentRouter);
+app.get('/departments', departmentsRouter);
+app.get('/department', departmentRouter);
+app.post('/department', departmentRouter);
+app.put('/department', departmentRouter);
+app.delete('/department', departmentRouter);
 
-app.use('/employees', employeesRouter);
-app.use('/employee', employeeRouter);
+app.get('/employees', employeesRouter);
+app.get('/employee', employeeRouter);
+app.post('/employee', employeeRouter);
+app.put('/employee', employeeRouter);
+app.delete('/employee', employeeRouter);
 
-app.use('/timecards', timecardsRouter);
-app.use('/timecard', timecardRouter);
+app.get('/timecards', timecardsRouter);
+app.get('/timecard', timecardRouter);
+app.post('/timecard', timecardRouter);
+app.put('/timecard', timecardRouter);
+app.delete('/timecard', timecardRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
