@@ -7,7 +7,7 @@ var dl = new DataLayer("ahl4753");
 
 module.exports = require('../companydata/lib/DataLayer');
 
-/* GET department */
+/* GET timecards */
 router.get('/timecards', function(req, res, next) {
     let timecd = bl.getAllTimecards(req.body.company);
     var response;
