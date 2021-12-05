@@ -46,11 +46,11 @@ router.get('/department', function(req, res, next) {
 
 // NEW DEPARTMENT | DONE, TESTED
 router.post('/department', function(req, res, next) {
-    let dept = bl.checkDepartmentPost(req.body.company, req.body.dept_id, req.body.dept_name, req.body.dept_no, req.body.location);
+    let dept = bl.checkDepartmentPost(req.body.company, req.body.dept_name, req.body.dept_no, req.body.location);
     var response;
 
     if (dept) {
-        var tdept = new dl.Department(req.body.company, req.body.dept_id, req.body.dept_name, req.body.dept_no, req.body.location);
+        var tdept = new dl.Department(req.body.company, req.body.dept_name, req.body.dept_no, req.body.location);
         dept = dl.insertDepartment(tdept);
         if (dept) {
             if (dept == null) {
@@ -84,11 +84,11 @@ router.post('/department', function(req, res, next) {
 
 // UPDATE DEPARTMENT | DONE, TESTED
 router.put('/department', function(req, res, next) {
-    var dept = bl.checkDepartmentPut(req.query.company, req.query.dept_id, req.query.dept_name, req.query.dept_no, req.query.location);
+    var dept = bl.checkDepartmentPut(req.body.company, req.body.dept_id, req.body.dept_name, req.body.dept_no, req.body.location);
     var response;
 
     if (dept) {
-        var tdept = new dl.Department(req.query.company, req.query.dept_name, req.query.dept_no, req.query.location, req.query.dept_id);
+        var tdept = new dl.Department(req.body.company, req.body.dept_name, req.body.dept_no, req.body.location, req.body.dept_id);
         dept = dl.updateDepartment(tdept);
         if (dept) {
             if (dept == null) {

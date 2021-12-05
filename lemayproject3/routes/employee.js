@@ -1,3 +1,4 @@
+const e = require('express');
 var express = require('express');
 var router = express.Router();
 
@@ -7,7 +8,7 @@ var dl = new DataLayer("ahl4753");
 
 module.exports = require('../companydata/lib/DataLayer');
 
-// GET EMPLOYEES | DONE, Fix Error Handling
+// GET EMPLOYEE | DONE, Fix Error Handling
 router.get('/employee', function(req, res, next) {
     let empl = bl.checkEmployeeGet(req.query.company, req.query.empl_id);
     var response;
@@ -33,13 +34,12 @@ router.get('/employee', function(req, res, next) {
     res.send(response);
 });
 
-// NEW EMPLOYEE | 
+// NEW EMPLOYEE | DONE, TESTED
 router.post('/employee', function(req, res, next) {
-    let empl = bl.checkEmployeePost(req.query.company, req.query.emp_name, req.query.emp_no, req.query.hire_date, req.query.job, req.query.salary, req.query.dept_id, req.query.mng_id);
+    let empl = bl.checkEmployeePost(req.body.company, req.body.emp_name, req.body.emp_no, req.body.hire_date, req.body.job, req.body.salary, req.body.dept_id, req.body.mng_id);
     var response;
-    
     if (empl) {
-        var templ = new dl.Employee(req.query.company, req.query.emp_name, req.query.emp_no, req.query.hire_date, req.query.job, req.query.salary, req.query.dept_id, req.query.mng_id);
+        var templ = new dl.Employee(req.body.emp_name, req.body.emp_no, req.body.hire_date, req.body.job, req.body.salary, req.body.dept_id, req.body.mng_id);
         empl = dl.insertEmployee(templ);
 
         if (empl == null) {
@@ -57,6 +57,72 @@ router.post('/employee', function(req, res, next) {
         }
     }
 
+    res.send(response);
+});
+
+// UPDATE EMPLOYEE | DONE, TESTED
+router.put('/employee', function(req, res, next){
+    var emp = bl.checkEmployeePut(req.body.company, req.body.emp_id, req.body.emp_name, req.body.emp_no, req.body.hire_date, req.body.job, req.body.salary, req.body.dept_id, req.body.mng_id);
+    var response;
+
+    if (emp) {
+        var tEmpl = new dl.Employee(req.body.emp_name, req.body.emp_no, req.body.hire_date, req.body.job, req.body.salary, req.body.dept_id, req.body.mng_id, req.body.emp_id);
+        emp = dl.updateEmployee(tEmpl);
+        if (emp) {
+            if (emp == null) {
+                response = {
+                    error: "Employee Failed to Update"
+                }
+            }
+            else {
+                response = emp;
+            }
+        }
+        else {
+            response = {
+                error: "Employee Failed to Update"
+            }
+        }
+    }
+    else {
+        response = {
+            error: "Error in Employee Input"
+        }
+    }
+    res.send(response);
+});
+
+// DELETE EMPLOYEE | DONE, TESTED
+router.delete('/employee', function(req, res, next){
+    var emp = bl.checkEmployeeDelete(req.query.company, req.query.emp_id);
+    var response;
+
+    if (emp) {
+        emp = dl.deleteEmployee(req.query.emp_id);
+        if (emp) {
+            if (emp == null) {
+                response = {
+                    error: "Employee Failed to Delete"
+                }
+            }
+            else {
+                response = {
+                    success: "Employee Deleted Successfully",
+                    affectedRows: emp
+                }
+            }
+        }
+        else {
+            response = {
+                error: "Employee Failed to Delete"
+            }
+        }
+    }
+    else {
+        response = {
+            error: "Error in Employee Input"
+        }
+    }
     res.send(response);
 });
 

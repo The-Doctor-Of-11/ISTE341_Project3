@@ -30,12 +30,9 @@ function checkDepartmentGet(company, dept_id) {
 }
 
 // NEW DEPARTMENT
-function checkDepartmentPost(company, dept_id, dept_name, dept_no, location) {
+function checkDepartmentPost(company, dept_name, dept_no, location) {
     var chkNo = dl.getDepartmentNo(company, dept_no);
     if (company.length < 1) {
-        return false;
-    }
-    else if (dept_id < 1) {
         return false;
     }
     else if (dept_name.length < 1) {
@@ -44,7 +41,7 @@ function checkDepartmentPost(company, dept_id, dept_name, dept_no, location) {
     else if (dept_no < 1) {
         return false;
     }
-    else if (chkNo.length < 1) {
+    else if (chkNo) {
         return false;
     }
     else if (location.length < 1) {
@@ -67,7 +64,7 @@ function checkDepartmentPut(company, dept_id, dept_name, dept_no, location) {
     else if (dept_id < 1) {
         return false;
     }
-    else if (chkNo.length < 1) {
+    else if (chkNo != null) {
         return false;
     }
     else if (chkId.length < 1) {
