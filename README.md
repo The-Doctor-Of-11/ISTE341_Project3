@@ -5,6 +5,7 @@ Terminal:
 * Run npm install
 * Run npm install ./companydata
 
+To Run:
 - Windows: set DEBUG=lemayproject2:* & npm start
 - PowerShell: $env:DEBUG='lemayproject2:\*'; npm start
 - Unix (Including Git Bash): DEBUG=lemayproject2:* npm start
