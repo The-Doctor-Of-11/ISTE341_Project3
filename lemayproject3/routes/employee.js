@@ -1,4 +1,3 @@
-const e = require('express');
 var express = require('express');
 var router = express.Router();
 
@@ -6,15 +5,13 @@ const bl = require('../BusinessLayer/employeeVal');
 var DataLayer = require("../companydata/index.js");
 var dl = new DataLayer("ahl4753");
 
-module.exports = require('../companydata/lib/DataLayer');
-
-// GET EMPLOYEE | DONE, Fix Error Handling
+// GET EMPLOYEE | DONE, TESTED
 router.get('/employee', function(req, res, next) {
-    let empl = bl.checkEmployeeGet(req.query.company, req.query.empl_id);
+    let empl = bl.checkEmployeeGet(req.query.company, req.query.emp_id);
     var response;
     
     if (empl) {
-        empl = dl.getEmployee(req.query.empl_id);
+        empl = dl.getEmployee(req.query.emp_id);
 
         if (empl == null) {
             response = {

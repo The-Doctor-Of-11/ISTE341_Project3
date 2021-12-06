@@ -17,7 +17,7 @@ function checkEmployeesGet(company) {
     }
 }
 
-function checkEmployeeGet(company, emp_name, emp_no, hire_date, job, salary, dept_id, mng_id) {
+function checkEmployeeGet(company, emp_id) {
     if (company.length < 1) {
         return false;
     }
