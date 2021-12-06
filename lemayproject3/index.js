@@ -81,7 +81,7 @@ app.get('/', function initViewsCount(req, res, next){
   return next();
 });
 
-app.use('/company', companyRouter);
+app.delete('/company', companyRouter);
 
 app.get('/departments', departmentsRouter);
 app.get('/department', departmentRouter);

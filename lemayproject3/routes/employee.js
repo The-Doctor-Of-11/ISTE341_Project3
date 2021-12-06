@@ -24,7 +24,7 @@ router.get('/employee', function(req, res, next) {
     }
     else {
         response = {
-            error: "Error in Input"
+            error: "Error in Employee Input"
         }
     }
 
