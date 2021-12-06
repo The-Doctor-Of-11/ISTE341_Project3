@@ -34,6 +34,7 @@ function checkEmployeePost(company, emp_name, emp_no, hire_date, job, salary, de
     var chkDpt = dl.getDepartment(company, dept_id);
     var chkMng = dl.getEmployee(mng_id);
     var chkEmp = dl.getAllEmployee(company);
+    
     // HireDate before current date
     var hDate = new Date(hire_date);
     var date = new Date();

@@ -44,7 +44,7 @@ router.post('/employee', function(req, res, next) {
 
         if (empl == null) {
             response = {
-                error: "Employee Not Found"
+                error: "Failed to Insert"
             }
         }
         else {
@@ -53,7 +53,7 @@ router.post('/employee', function(req, res, next) {
     }
     else {
         response = {
-            error: "Error in Input"
+            error: "Error in Employee Input"
         }
     }
 

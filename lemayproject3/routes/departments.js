@@ -10,7 +10,6 @@ module.exports = require('../companydata/lib/DataLayer');
 /* GET departments */
 router.get('/departments', function(req, res, next) {
     let dept = bl.checkDepartmentsGet(req.query.company);
-    console.log(req.query.company);
     if (dept) {
 
         dept = dl.getAllDepartment(req.query.company);
