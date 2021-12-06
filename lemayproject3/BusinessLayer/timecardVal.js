@@ -39,6 +39,7 @@ function checkTimecardPost(company, emp_id, start_time, end_time) {
     eTime.setSeconds(end_time.substring(17, 19));
 
     var oTimes = dl.getAllTimecard(emp_id);
+    // seems like oTimes is the error source, but cant figure out why. ask nate? also ask prof about what type of timecard / timestamp / date object that timecard add needs. Ask about why date object pushes time 5 hours ahead.
 
     // StartTime Equal To Current or after previous Monday
     var date = new Date();
@@ -50,7 +51,7 @@ function checkTimecardPost(company, emp_id, start_time, end_time) {
     else{
         prevMonday.setDate(date.getDate() - (day-1));
     }
-console.log("dasds");
+
     // EndTime 1 Hour Greater and Same Day as StartTime
     if ((sTime.getDate() != eTime.getDate()) && (sTime.getMonth() != eTime.getMonth()) && (sTime.getFullYear() != eTime.getFullYear())) {
         return false;
